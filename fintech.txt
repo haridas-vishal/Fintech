@@ -1,0 +1,208 @@
+## Project 1: FinTech – Real-Time Fraud Detection Engine
+
+### Project Title
+
+**High-Throughput Transaction Guard**
+
+### Product / Brand Name
+
+**SentinelStream**
+
+---
+
+## 1. Production Use Case
+
+A large-scale Neo-bank requires a **high-performance, low-latency fraud detection system** capable of processing **tens of thousands of credit card transactions per second**.
+
+SentinelStream operates **between the external payment gateway and the bank’s internal ledger**, analyzing each transaction in **under 200 milliseconds** using:
+
+* A **static, rule-based fraud engine**
+* A **predictive, pre-trained Machine Learning model**
+
+The system must instantly **approve or flag suspicious transactions** without blocking payment flows.
+
+---
+
+## 2. Core Functional Features
+
+### Basic Functions
+
+* User Transaction History API
+* Current Balance Check API
+* Secure, immutable transaction logging
+* Standard REST-based API design
+* Strong data integrity and persistence
+
+---
+
+## 3. Deep Production-Level Capabilities
+
+### A. Concurrency & Data Integrity
+
+**Idempotency Keys**
+
+* Prevents double charging or duplicate ledger entries
+* Handles retry scenarios when client requests timeout
+* Implemented via middleware
+* Unique request keys logged and validated per transaction
+
+---
+
+### B. Failure Recovery & Reliability
+
+**Asynchronous Webhooks**
+
+* Non-blocking merchant or third-party notifications
+* Transaction status updates (Approved / Declined)
+* Ensures delivery even during partial failures
+* Implemented using **Celery + RabbitMQ**
+
+---
+
+### C. Fraud Rules Engine
+
+**Dynamic Rule Engine**
+
+* Configurable fraud rules defined by non-technical staff
+* Example rule:
+
+  * `IF transaction_amount > 5000 AND location != user_home → FLAG AS RISK`
+* Rules stored in database
+* Modular Python class-based architecture
+* Evaluated in real time before ML scoring
+
+---
+
+### D. Machine Learning Intelligence
+
+**ML-Based Risk Scoring**
+
+* Real-time scoring using a **pre-trained Scikit-Learn pipeline**
+* Outputs a fraud risk score between **0.0 – 1.0**
+* Uses **Isolation Forest** for anomaly detection
+* Focus on:
+
+  * Model serialization
+  * Low-latency inference
+  * Fast feature engineering
+
+---
+
+## 4. System Architecture
+
+### Technology Stack
+
+* **Backend Framework:** FastAPI (ASGI, async, high concurrency)
+* **Database:** PostgreSQL (Immutable financial ledger, ACID compliant)
+* **Cache / Rate Limiting:** Redis
+* **Async Tasks:** Celery + RabbitMQ
+* **ORM:** SQLAlchemy (AsyncIO)
+* **Authentication:** JWT (JSON Web Tokens)
+* **Containerization:** Docker
+* **Reverse Proxy & SSL:** Nginx
+
+---
+
+### Architecture Flow (Sequence)
+
+1. User initiates transaction
+2. Payment Gateway forwards request
+3. SentinelStream FastAPI endpoint receives transaction
+4. Rule Engine evaluation
+5. ML Model risk scoring
+6. PostgreSQL ledger write
+7. Async webhook trigger (merchant notification)
+8. Response returned to gateway
+
+---
+
+## 5. Validation & Performance Tools
+
+* **FastAPI-Limiter** for burst traffic control
+* **Redis** for hot data caching and session management
+* **Pydantic** for strict request/response schema validation
+* **Locust** for load testing
+* **PyTest** for unit and integration testing
+
+---
+
+## 6. Weekly Execution Plan
+
+### Week 1 – Planning & Architecture
+
+**Goals**
+
+* Define complete Software Requirement Specification (SRS)
+* Design relational database schema
+* Star Schema for analytics
+* Setup GitHub repository
+* Configure CI/CD using GitHub Actions
+* Create Admin Dashboard wireframes
+
+**Deliverables**
+
+* Verified 3NF normalization
+* Stable API contracts (Swagger / OpenAPI)
+
+---
+
+### Week 2 – Core Transaction Pipeline
+
+**Goals**
+
+* Develop high-speed `POST /transaction` endpoint
+* Implement Redis caching for user profiles
+* Integrate PostgreSQL using SQLAlchemy AsyncIO
+
+**Validation**
+
+* Load testing using Locust
+* Must sustain **≥ 100 requests/second** locally
+
+---
+
+### Week 3 – Intelligence Layer (Rules + ML)
+
+**Goals**
+
+* Integrate Isolation Forest anomaly detection model
+* Fully implement dynamic Rule Engine
+* Configure Celery workers for email alerts
+
+**Validation**
+
+* End-to-end latency consistently **< 200 ms**
+* Accuracy review of fraud detection
+
+---
+
+### Week 4 – Finalization & Deployment
+
+**Goals**
+
+* Full Docker containerization
+* Nginx reverse proxy configuration
+* SSL termination and load distribution
+* JWT-based endpoint security
+* Comprehensive PyTest test suite
+
+**Final Checks**
+
+* Security audit (SQL Injection, common vulnerabilities)
+* Code coverage **> 80%**
+* Final performance and architecture presentation
+
+---
+
+## 7. Key Engineering Pillars Demonstrated
+
+* High Concurrency
+* Fault Tolerance
+* Real-Time ML Inference
+* Financial Data Integrity
+* Production-Grade Security
+* Scalable Microservice Design
+
+---
+
+**End of Extract – FinTech Project: SentinelStream**

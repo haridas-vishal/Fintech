@@ -1,0 +1,11 @@
+fastapi
+uvicorn
+sqlalchemy
+asyncpg
+redis
+python-jose
+celery
+joblib
+scikit-learn
+pytest
+pandas

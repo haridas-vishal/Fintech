@@ -1,0 +1,15 @@
+User / Merchant
+        |
+Payment Gateway
+        |
+FastAPI (SentinelStream)
+        |
+Rule Engine ----> Redis (cache / rate limit)
+        |
+ML Model (Isolation Forest)
+        |
+PostgreSQL (Transactions)
+        |
+Celery + RabbitMQ
+        |
+Merchant Webhook
